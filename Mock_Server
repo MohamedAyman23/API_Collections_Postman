@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "500af72f-395a-4796-a76e-8d611a58edcd",
+		"name": "MockServer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42690881"
+	},
+	"item": [
+		{
+			"name": "Getting an employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Mockapi}}/Employee/:id",
+					"host": [
+						"{{Mockapi}}"
+					],
+					"path": [
+						"Employee",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{UserId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a new employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Status code is\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var responseBody = pm.response.json().id;\r",
+							"pm.collectionVariables.set(\"UserId\", responseBody);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Fname\": \"Hamdy Mahamoud\",\r\n    \"Lname\": \"Mohammed\",\r\n    \"Car\": \"Audi2025\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Mockapi}}/Employee",
+					"host": [
+						"{{Mockapi}}"
+					],
+					"path": [
+						"Employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit a new employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Fname\": \"Yousef\",\r\n    \"Lname\": \"Ayman\",\r\n    \"Car\": \"Karo car\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Mockapi}}/Employee/:id",
+					"host": [
+						"{{Mockapi}}"
+					],
+					"path": [
+						"Employee",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an employee",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Mockapi}}/Employee/:id",
+					"host": [
+						"{{Mockapi}}"
+					],
+					"path": [
+						"Employee",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an employee",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Fname\": \"Yasmeen\",\r\n    \"Lname\": \"Ayman\",\r\n    \"Car\": \"car with a donki\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Mockapi}}/Employee/:id",
+					"host": [
+						"{{Mockapi}}"
+					],
+					"path": [
+						"Employee",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "22"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "Mockapi",
+			"value": "https://67c60395351c081993fc373e.mockapi.io/",
+			"type": "default"
+		},
+		{
+			"key": "UserId",
+			"value": ""
+		}
+	]
+}
